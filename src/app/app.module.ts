@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ConfigurationComponent } from './modules/configuration/pages/configuration/configuration.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
