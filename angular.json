@@ -50,6 +50,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "baseHref": "https://RafaGomez.github.io/ar-test/",
               "budgets": [
                 {
                   "type": "initial",
