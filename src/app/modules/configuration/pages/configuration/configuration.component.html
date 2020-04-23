@@ -1,1 +1,20 @@
-<p>configuration works!</p>
+<h1>Locations</h1>
+
+<div class="coord">
+    <div class="coord__list"  *ngFor='let loc of configuredLocations$ | async'>
+        {{loc.id}}
+        {{loc.latitude}}
+    </div>
+    <div class="coord__add">
+        <dx-button text="ADD" (onClick)="onAddClicked($event)">
+        </dx-button>
+    </div>
+</div>
+
+<dx-popup
+    title="Add new location"
+    [(visible)]="isPopupVisible">
+    <div *dxTemplate="let data of 'content'">
+        <p>Popup content</p>
+    </div>
+</dx-popup>

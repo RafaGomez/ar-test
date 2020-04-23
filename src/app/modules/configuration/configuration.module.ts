@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigurationComponent } from './pages/configuration/configuration.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DxButtonModule, DxPopupModule } from 'devextreme-angular';
 
 const routes: Routes = [
   {
@@ -11,10 +12,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConfigurationComponent,
+  ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    DxButtonModule,
+    DxPopupModule
   ]
 })
 export class ConfigurationModule { }
