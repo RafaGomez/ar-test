@@ -16,7 +16,7 @@ export class CameraComponent implements OnInit {
   constructor( private sharedService: SharedService) { }
 
   ngOnInit(): void {
-    this.locations$ = this.sharedService.getCoordinates();
+    this.locations$ = this.sharedService.getLocations();
     setTimeout(() => {
       this.hideCurtain = true;
     }, 1000);

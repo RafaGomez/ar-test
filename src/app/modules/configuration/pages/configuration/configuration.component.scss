@@ -1,0 +1,16 @@
+.coord__list {
+    &__label {
+        float: left;
+        width: 40%;
+        font-style: italic;
+    }
+    button {
+        background-color: red;
+        color: white;
+        padding: .5rem;
+    }
+}
+
+.dx-card {
+    margin: 1rem 1rem 1rem 1rem;
+}

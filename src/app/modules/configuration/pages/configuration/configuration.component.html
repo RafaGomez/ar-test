@@ -1,20 +1,51 @@
 <h1>Locations</h1>
-
+<a [routerLink]="['/camera']">
+    Go to camera
+  </a>
 <div class="coord">
-    <div class="coord__list"  *ngFor='let loc of configuredLocations$ | async'>
-        {{loc.id}}
-        {{loc.latitude}}
+    <div class="coord__list dx-card" *ngFor='let loc of configuredLocations$ | async'>
+        
+        <div class="coord__list__label">Latitude</div>
+        <div class="coord__list__value">{{loc.latitude}}</div>
+
+        <div class="coord__list__label">Longitude</div>
+        <div class="coord__list__value">{{loc.longitude}}</div>
+
+        <div class="coord__list__label">Color</div>
+        <div class="coord__list__value">{{loc.color}}</div>
+        <button itemType="button" horizontalAlignment="left" (click)= 'removeElement(loc.id)'>Delete</button>
     </div>
     <div class="coord__add">
-        <dx-button text="ADD" (onClick)="onAddClicked($event)">
+        <dx-button text="Add another location" (onClick)="onAddClicked($event)">
         </dx-button>
     </div>
 </div>
 
-<dx-popup
-    title="Add new location"
-    [(visible)]="isPopupVisible">
+<dx-popup title="Add new location" [(visible)]="isPopupVisible">
     <div *dxTemplate="let data of 'content'">
         <p>Popup content</p>
+        <form action="your-action" (submit)="onFormSubmit($event)">
+            <dx-form (onFieldDataChanged)="form_fieldDataChanged($event)" id="form" [formData]="newLocation" labelLocation="top" [readOnly]="false"
+                [showColonAfterLabel]="true">
+                <dxi-item itemType="group" cssClass="first-group" [colCount]="1">
+                    <dxi-item itemType="group" [colSpan]="1">
+                        <dxi-item dataField="latitude" editorType="dxNumberBox" [editorOptions]="{ width: '100%'}">
+                        </dxi-item>
+                    </dxi-item>
+                    <dxi-item itemType="group" [colSpan]="1">
+                        <dxi-item dataField="longitude" editorType="dxNumberBox" [editorOptions]="{ width: '100%'}">
+                        </dxi-item>
+                    </dxi-item>
+                    <dxi-item itemType="group" [colSpan]="1">
+                        <dxi-item dataField="color" editorType="dxSelectBox"
+                            [editorOptions]="{ items: supportedColors }"></dxi-item>
+                        <dxi-validation-rule type="required" message="Color is required">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="button" horizontalAlignment="left" [buttonOptions]="buttonOptions">
+                </dxi-item>
+            </dx-form>
+        </form>
     </div>
 </dx-popup>

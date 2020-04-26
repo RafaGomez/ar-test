@@ -7,27 +7,35 @@ import { of, Observable } from 'rxjs';
 })
 export class SharedService {
 
-  constructor() { }
+  LOCAL_STORAGE_KEY = 'locationDB';
+  storedLocations = [] as ILocationElement[];
 
-  getCoordinates(): Observable<ILocationElement[]> {
-    const el1: ILocationElement = {
-      id: 1,
-      latitute: 37.2882290,
-      longitude: -5.9351281,
-      color: 'green'
-    };
-    const el2: ILocationElement = {
-      id: 2,
-      latitute: 37.2883165,
-      longitude: -5.9349816,
-      color: 'yellow'
-    };
-    const el3: ILocationElement = {
-      id: 3,
-      latitute: 37.2877603,
-      longitude: -5.9351415,
-      color: 'red'
-    };
-    return of([el1, el2, el3]);
+  constructor() {
+    this.loadLocalStorage();
+   }
+
+  getLocations(): Observable<ILocationElement[]> {
+    return of(this.storedLocations);
   }
+
+  addLocation(newLocation: ILocationElement) {
+    this.storedLocations.push(newLocation);
+    this.saveLocalStorage();
+  }
+
+  removeLocation(id: number){
+    this.storedLocations = this.storedLocations.filter ( e => e.id !== id);
+    this.saveLocalStorage();
+  }
+
+  private saveLocalStorage() {
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.storedLocations));
+  }
+
+  private loadLocalStorage() {
+    if (localStorage.getItem(this.LOCAL_STORAGE_KEY)) {
+      this.storedLocations = JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_KEY)) as ILocationElement[];
+    }
+  }
+
 }
